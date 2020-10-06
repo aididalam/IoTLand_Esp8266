@@ -68,11 +68,11 @@ iotland.button(buttonGroupId,key);
 
 ##Data return Type
 
-graph() = bool [success=1, error=0]
-meter() = bool [success=1, error=0]
-card() = bool [success=1, error=0]
-tracker() = bool [success=1, error=0]
-button() = int [key value]
+- graph() = bool [success=1, error=0]
+- meter() = bool [success=1, error=0]
+- card() = bool [success=1, error=0]
+- tracker() = bool [success=1, error=0]
+- button() = int [key value]
 
 ------------
 
