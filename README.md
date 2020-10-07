@@ -8,7 +8,7 @@ You can Add **Arduino_Json** from from your Arduino Libary Manager or You can Do
 
 ## Installation of IoTLand ESP8266
 
-1) [Download](https://github.com/aididalam/IoTLand_Esp8266/archive/master.zip) the source code from GitHub.  
+1) [Download](https://github.com/aididalam/IoTLand_Esp8266/archive/main.zip) the source code from GitHub.  
 2) Unzip and rename the Folder name to "IoTLand".  
 3) Paste it in your Library folder (Usually located somewhere at documents/Arduino/libraries).  
 4) Restart the Arduino IDE.  
