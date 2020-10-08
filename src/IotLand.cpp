@@ -143,6 +143,28 @@ bool IoTLand::graph(int id, String variable[],float value[]){
 }
 
 
+bool IoTLand::email(int id, String msg){
+     
+  if (WiFi.status() == WL_CONNECTED) {
+
+      String ServerUrl=site+"iemail/"+(String)id+"/"+api;
+      String MeterData;
+	  String msgdata=(String)"msg="+(String)msg;
+      MeterData = httpPOSTRequest(ServerUrl,msgdata);
+      JSONVar myObject = JSON.parse(MeterData);
+	  String jsonKey;
+      if (JSON.typeof(myObject) == "undefined") {
+        Serial.println("Parsing input failed!");
+		Serial.println("Please check Api key,Componant Id,wifi connectivity.\nIf everything is ok then contact with IotLand Administer or email to: support@iotland.net.");
+      }else{
+			JSONVar keys = myObject.keys();
+			jsonKey=(const char*)keys[0];
+			return (String)jsonKey.equals("success");
+      }
+  }
+}
+
+
 String IoTLand::httpGETRequest(String serverName) {
   HTTPClient http;
   WiFiClientSecure client;
@@ -174,4 +196,44 @@ String IoTLand::httpGETRequest(String serverName) {
 
   return payload;
 }
+
+
+
+String IoTLand::httpPOSTRequest(String serverName,String data) {
+  HTTPClient http;
+  WiFiClientSecure client;
+  client.setInsecure();
+  http.begin(client,serverName);
+  // Specify content-type header
+	http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+  
+  int httpResponseCode = http.POST(data);
+  String payload = "{}"; 
+  String error;
+  if (httpResponseCode==200) {
+    payload = http.getString();
+  }else if (httpResponseCode==401) {
+    Serial.print("Error Api or Componant Id.\nApi key: ");
+    Serial.println(api);
+    Serial.println(" Please enter a valid api key and check componant id. ");
+  }else if (httpResponseCode==404 || httpResponseCode==406) {
+	error = http.getString();
+    Serial.println(error);
+  }
+  else {
+    Serial.print("Error code: ");
+    Serial.println(httpResponseCode);
+	error = http.getString();
+    Serial.println(error);
+    Serial.println("Please contact with IotLand Administer or email to: support@iotland.net.");
+  }
+  // Free resources
+  http.end();
+
+  return payload;
+}
+
+
+
+
 

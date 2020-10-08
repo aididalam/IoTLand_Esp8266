@@ -14,8 +14,10 @@ class IoTLand {
 		bool card(int id,String value);
 		bool tracker(int id,String lat,String lng);
 		bool graph(int id,String variable[],float value[]);
+		bool email(int id,String msg);
 	private:
 		String httpGETRequest(String serverName);
+		String httpPOSTRequest(String serverName,String data);
 		
 };
 
