@@ -82,6 +82,7 @@ iotland.meter(emailId, message);
 - tracker() = bool [success=1, error=0]
 - button() = int [key value]
 - email() = bool [success=1, error=0]
+- alert() = bool [success=1, error=0]
 
 ------------
 

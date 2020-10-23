@@ -148,10 +148,10 @@ bool IoTLand::email(int id, String msg){
   if (WiFi.status() == WL_CONNECTED) {
 
       String ServerUrl=site+"iemail/"+(String)id+"/"+api;
-      String MeterData;
+      String EmailData;
 	  String msgdata=(String)"msg="+(String)msg;
-      MeterData = httpPOSTRequest(ServerUrl,msgdata);
-      JSONVar myObject = JSON.parse(MeterData);
+      EmailData = httpPOSTRequest(ServerUrl,msgdata);
+      JSONVar myObject = JSON.parse(EmailData);
 	  String jsonKey;
       if (JSON.typeof(myObject) == "undefined") {
         Serial.println("Parsing input failed!");
@@ -163,6 +163,27 @@ bool IoTLand::email(int id, String msg){
       }
   }
 }
+
+bool IoTLand::alert(int id){
+     
+  if (WiFi.status() == WL_CONNECTED) {
+
+      String ServerUrl=site+"ialert/"+(String)id+"/"+api;
+      String AlertData;
+      AlertData = httpGETRequest(ServerUrl);
+      JSONVar myObject = JSON.parse(AlertData);
+	  String jsonKey;
+      if (JSON.typeof(myObject) == "undefined") {
+        Serial.println("Parsing input failed!");
+		Serial.println("Please check Api key,Componant Id,wifi connectivity.\nIf everything is ok then contact with IotLand Administer or email to: support@iotland.net.");
+      }else{
+			JSONVar keys = myObject.keys();
+			jsonKey=(const char*)keys[0];
+			return (String)jsonKey.equals("success");
+      }
+  }
+}
+
 
 
 String IoTLand::httpGETRequest(String serverName) {

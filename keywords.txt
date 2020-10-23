@@ -12,3 +12,4 @@ card	KEYWORD2
 tracker	KEYWORD2
 button	KEYWORD2
 email	KEYWORD2
+alert	KEYWORD2
