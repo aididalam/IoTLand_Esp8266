@@ -70,7 +70,14 @@ iotland.button(buttonGroupId,key);
 ### Sending Emails
 ```c++
 int emailId,String message;
-iotland.meter(emailId, message);
+iotland.email(emailId, message);
+//Check Examples for better Understand
+```
+
+### Sending Alert/Push Notification
+```c++
+int alertId;
+iotland.alert(alertId);
 //Check Examples for better Understand
 ```
 
